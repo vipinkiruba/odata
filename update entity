@@ -1,0 +1,25 @@
+  method ZTBIGBOYSET_UPDATE_ENTITY.
+data : wa_entity like er_entity,
+      gs_bigboy type ztbigboy.
+
+*read incoming data
+TRY.
+CALL METHOD IO_DATA_PROVIDER->READ_ENTRY_DATA
+  IMPORTING
+    ES_DATA = wa_entity
+    .
+
+if wa_entity is not INITIAL.
+
+  MOVE-CORRESPONDING wa_entity to gs_bigboy.
+  modify ztbigboy from gs_bigboy.
+
+  MOVE-CORRESPONDING wa_entity to er_entity.
+ENDIF.
+
+ CATCH /IWBEP/CX_MGW_TECH_EXCEPTION .
+ENDTRY.
+
+
+
+  endmethod.
