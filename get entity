@@ -1,0 +1,14 @@
+  method ZTBIGBOYSET_GET_ENTITY.
+
+data : ls_key_tab type /IWBEP/S_MGW_NAME_VALUE_PAIR,
+       lv_id type NUM2.
+*read the importing parameter
+read TABLE it_key_tab into ls_key_tab WITH key name = 'Id'.
+
+if ls_key_tab-value is not INITIAL.
+  lv_id = ls_key_tab-value.
+
+ select SINGLE * FROM ztbigboy into CORRESPONDING FIELDS OF er_entity where ID = lv_id.
+   ENDIF.
+
+  endmethod.
