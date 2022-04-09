@@ -1,0 +1,7 @@
+  method ZTBIGBOYSET_DELETE_ENTITY.
+
+READ TABLE it_key_tab into data(lt_key_tab) with key name = 'Id'.
+
+delete from ztbigboy where id = lt_key_tab-value.
+
+  endmethod.
