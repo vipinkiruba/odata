@@ -1,0 +1,5 @@
+  method ZTBIGBOYSET_GET_ENTITYSET.
+
+select * from ztbigboy into CORRESPONDING FIELDS OF table et_entityset.
+
+  endmethod.
