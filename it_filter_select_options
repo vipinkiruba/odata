@@ -1,0 +1,21 @@
+method PO_HEADERSET_GET_ENTITYSET.
+
+    data: po_low type STRING.
+    data: wa_filter_select_options type /IWBEP/S_MGW_SELECT_OPTION.  "it_filter_select_options
+
+    data: IT_FILTER_VALUES type /IWBEP/T_COD_SELECT_OPTIONS.   "type (select options table) inside filter table
+   " data:  WA_FILTER_VALUES like line of /IWBEP/S_COD_SELECT_OPTION.
+
+    READ TABLE IT_filter_select_options into wa_filter_select_options
+    with key PROPERTY = 'PoNumber'.
+
+    if sy-subrc eq 0.
+      IT_FILTER_VALUES = wa_filter_select_options-SELECT_OPTIONS[].
+      READ TABLE IT_FILTER_VALUES into data(WA_FILTER_VALUES) index 1.
+    ENDIF.
+
+    if sy-subrc eq 0.
+       po_low = WA_FILTER_VALUES-low.
+    ENDIF.
+    BREAK-POINT.
+  endmethod.
