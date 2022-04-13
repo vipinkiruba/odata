@@ -1,0 +1,20 @@
+data: wa_header TYPE BAPIEKKOL.    "type of bapi export parameter
+
+    CALL FUNCTION 'BAPI_PO_GETDETAIL'
+      EXPORTING
+        purchaseorder                    = po_low
+     IMPORTING
+       PO_HEADER                        = wa_header.   "now it has all fields
+
+              .
+
+data: wa_final TYPE ZCL_ZTEST3_MPC=>TS_PO_HEADER.           "we need to take the required fields
+              wa_final-po_number = wa_header-po_number.
+              wa_final-co_code = wa_header-co_code.
+              wa_final-created_on = wa_header-created_on.
+              wa_final-status = wa_header-status.
+              wa_final-vendor = wa_header-vendor.
+
+
+              append wa_final to et_entityset.
+clear wa_final.
